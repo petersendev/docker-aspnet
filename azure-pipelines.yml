@@ -1,0 +1,22 @@
+trigger:
+- master
+
+strategy:
+  matrix:
+    aspnet21:
+      dotnetVersion: 2.1
+    aspnet30:
+      dotnetVersion: 3.0
+    aspnet31:
+      dotnetVersion: 3.1
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Docker@2
+  inputs:
+    containerRegistry: 'DockerHub'
+    command: 'login'
+- script: |
+    docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
