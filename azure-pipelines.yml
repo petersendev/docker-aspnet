@@ -3,6 +3,7 @@ trigger:
 
 variables:
   DOCKER_CLI_EXPERIMENTAL: enabled
+  DOCKER_BUILD_KIT: 1
 
 strategy:
   matrix:
@@ -28,6 +29,6 @@ steps:
     command: 'login'
 - script: |
     docker version
-    docker help
+    docker info
     docker buildx --help
   displayName: docker buildx
