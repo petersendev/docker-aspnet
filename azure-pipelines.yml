@@ -1,6 +1,9 @@
 trigger:
 - master
 
+variables:
+  DOCKER_CLI_EXPERIMENTAL: enabled
+
 strategy:
   matrix:
     aspnet21:
