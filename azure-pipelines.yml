@@ -28,5 +28,6 @@ steps:
     command: 'login'
 - script: |
     docker version
-    docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
+    docker help
+    docker buildx --help
   displayName: docker buildx
