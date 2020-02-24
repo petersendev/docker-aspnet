@@ -30,5 +30,6 @@ steps:
     docker buildx version
   displayName: install buildx extension
 - script: |
+    docker buildx create --use
     docker buildx build --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
   displayName: docker buildx
