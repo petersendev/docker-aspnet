@@ -24,6 +24,8 @@ steps:
     containerRegistry: 'DockerHub'
     command: 'login'
 - script: |
+    curl -J -L -o ~/.docker/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/latest
+    chmod a+x ~/.docker/cli-plugins/docker-buildx
     docker version
     docker info
     docker buildx --help
