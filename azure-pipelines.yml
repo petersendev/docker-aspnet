@@ -5,9 +5,9 @@ variables:
   DOCKER_CLI_EXPERIMENTAL: enabled
   DOCKER_BUILD_KIT: 1
   ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
-    output: type=registry,push=false
+    output: type=image,push=false
   ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
-    output: type=registry,push=true
+    output: type=image,push=true
 
 strategy:
   matrix:
