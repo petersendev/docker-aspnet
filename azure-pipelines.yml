@@ -1,0 +1,41 @@
+trigger:
+- master
+
+variables:
+  DOCKER_CLI_EXPERIMENTAL: enabled
+  DOCKER_BUILD_KIT: 1
+  ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
+    output: type=image,push=false
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+    output: type=image,push=true
+
+strategy:
+  matrix:
+    aspnet21:
+      dotnetVersion: 2.1
+    aspnet30:
+      dotnetVersion: 3.0
+    aspnet31:
+      dotnetVersion: 3.1
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Docker@2
+  displayName: docker login
+  inputs:
+    containerRegistry: 'DockerHub'
+    command: 'login'
+- script: |
+    mkdir -p $DOCKER_CONFIG/cli-plugins
+    curl -J -L -o $DOCKER_CONFIG/cli-plugins/docker-buildx https://github.com/docker/buildx/releases/download/v0.3.1/buildx-v0.3.1.linux-amd64
+    chmod a+x $DOCKER_CONFIG/cli-plugins/docker-buildx
+    docker buildx version
+  displayName: install buildx extension
+- script: |
+    echo running for aspnet:$(dotnetVersion) - $(output)
+    docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+    docker buildx create --use
+    docker buildx build -o $(output) --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
+  displayName: docker buildx
