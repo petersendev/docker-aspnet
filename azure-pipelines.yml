@@ -4,6 +4,10 @@ trigger:
 variables:
   DOCKER_CLI_EXPERIMENTAL: enabled
   DOCKER_BUILD_KIT: 1
+  ${{ if ne(variables['Build.SourceBranchName'], 'master') }}:
+    output: type=registry,push=false
+  ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+    output: type=registry,push=true
 
 strategy:
   matrix:
@@ -32,5 +36,5 @@ steps:
 - script: |
     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     docker buildx create --use
-    docker buildx build --push --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
+    docker buildx build -o $(output) --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
   displayName: docker buildx
