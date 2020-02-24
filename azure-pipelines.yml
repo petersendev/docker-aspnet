@@ -34,6 +34,7 @@ steps:
     docker buildx version
   displayName: install buildx extension
 - script: |
+    echo running for aspnet:$(dotnetVersion) - $(output)
     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     docker buildx create --use
     docker buildx build -o $(output) --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
