@@ -31,10 +31,11 @@ RUN \
     && apk add --no-cache \
         libcrypto1.1=1.1.1d-r3 \
         libssl1.1=1.1.1d-r3 \
-        musl-utils=1.1.24-r0 \
-        musl=1.1.24-r0 \
+        musl-utils=1.1.24-r1 \
+        musl=1.1.24-r1 \
     \
     && apk add --no-cache \
+        shadow=4.7-r1 \
         bash=5.0.11-r1 \
         curl=7.67.0-r0 \
         jq=1.6-r0 \
@@ -62,7 +63,11 @@ RUN \
     \
     && apk del --no-cache --purge .build-dependencies \
     && rm -f -r \
-        /tmp/*
+        /tmp/* \
+    && groupmod -g 1000 users \
+    && useradd -u 911 -U -d /config -s /bin/false abc \
+    && usermod -G users abc \
+    && mkdir -p /app
 
 WORKDIR /app
 
