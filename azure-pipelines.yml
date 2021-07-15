@@ -13,8 +13,10 @@ strategy:
   matrix:
     aspnet21:
       dotnetVersion: 2.1
+      dotnetExtraFolder: /core
     aspnet30:
       dotnetVersion: 3.0
+      dotnetExtraFolder: /core
     aspnet31:
       dotnetVersion: 3.1
     net50:

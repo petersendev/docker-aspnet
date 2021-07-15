@@ -1,5 +1,5 @@
 ARG DOTNETVERSION=3.1
-FROM mcr.microsoft.com/dotnet/core/aspnet:${DOTNETVERSION}-alpine
+FROM mcr.microsoft.com/dotnet${DOTNETEXTRAFOLDER}/aspnet:${DOTNETVERSION}-alpine
 
 # Environment variables
 ENV \
