@@ -13,8 +13,7 @@ strategy:
   matrix:
     aspnet21:
       dotnetVersion: 2.1
-    aspnet30:
-      dotnetVersion: 3.0
+      dotnetExtraFolder: /core
     aspnet31:
       dotnetVersion: 3.1
     net50:
@@ -39,5 +38,5 @@ steps:
     echo running for aspnet:$(dotnetVersion) - $(output)
     docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
     docker buildx create --use
-    docker buildx build -o $(output) --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) -t petersendev/aspnet:$(dotnetVersion) .
+    docker buildx build -o $(output) --platform linux/amd64,linux/arm/v7,linux/arm64 --build-arg DOTNETVERSION=$(dotnetVersion) --build-arg DOTNETEXTRAFOLDER=$(dotnetExtraFolder) -t petersendev/aspnet:$(dotnetVersion) .
   displayName: docker buildx

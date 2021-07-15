@@ -1,5 +1,5 @@
 ARG DOTNETVERSION=3.1
-FROM mcr.microsoft.com/dotnet/core/aspnet:${DOTNETVERSION}-alpine
+FROM mcr.microsoft.com/dotnet${DOTNETEXTRAFOLDER}/aspnet:${DOTNETVERSION}-alpine
 
 # Environment variables
 ENV \
@@ -26,20 +26,20 @@ RUN \
     && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
     \
     && apk add --no-cache --virtual .build-dependencies \
-        tar=1.32-r1 \
+        tar=1.34-r0 \
     \
     && apk add --no-cache \
-        libcrypto1.1=1.1.1d-r3 \
-        libssl1.1=1.1.1d-r3 \
-        musl-utils=1.1.24-r1 \
-        musl=1.1.24-r1 \
+        libcrypto1.1=1.1.1k-r0 \
+        libssl1.1=1.1.1k-r0 \
+        musl-utils=1.2.2-r0 \
+        musl=1.2.2-r0 \
     \
     && apk add --no-cache \
-        shadow=4.7-r1 \
-        bash=5.0.11-r1 \
-        curl=7.67.0-r0 \
-        jq=1.6-r0 \
-        tzdata=2019c-r0 \
+        shadow=4.8.1-r0 \
+        bash=5.1.0-r0 \
+        curl=7.77.0-r1 \
+        jq=1.6-r1 \
+        tzdata=2021a-r0 \
     \
     && S6_ARCH="${TARGETPLATFORM}" \
     && if [ "${TARGETPLATFORM}" = "linux/arm/v7" ]; then S6_ARCH="armhf"; fi \
