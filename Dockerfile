@@ -29,10 +29,10 @@ RUN \
         tar=1.34-r0 \
     \
     && apk add --no-cache \
-        libcrypto1.1=1.1.1d-r3 \
-        libssl1.1=1.1.1d-r3 \
-        musl-utils=1.1.24-r1 \
-        musl=1.1.24-r1 \
+        libcrypto1.1=1.1.1k-r0 \
+        libssl1.1=1.1.1k-r0 \
+        musl-utils=1.2.2-r0 \
+        musl=1.2.2-r0 \
     \
     && apk add --no-cache \
         shadow=4.7-r1 \
