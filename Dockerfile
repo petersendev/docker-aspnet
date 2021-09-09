@@ -29,15 +29,15 @@ RUN \
         tar=1.34-r0 \
     \
     && apk add --no-cache \
-        libcrypto1.1=1.1.1k-r0 \
-        libssl1.1=1.1.1k-r0 \
-        musl-utils=1.2.2-r0 \
-        musl=1.2.2-r0 \
+        libcrypto1.1=1.1.1l-r0 \
+        libssl1.1=1.1.1l-r0 \
+        musl-utils=1.2.2-r1 \
+        musl=1.2.2-r1 \
     \
     && apk add --no-cache \
         shadow=4.8.1-r0 \
         bash=5.1.0-r0 \
-        curl=7.77.0-r1 \
+        curl=7.78.0-r0 \
         jq=1.6-r1 \
         tzdata=2021a-r0 \
     \
