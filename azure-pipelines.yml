@@ -18,6 +18,8 @@ strategy:
       dotnetVersion: 3.1
     net50:
       dotnetVersion: 5.0
+    net60:
+      dotnetVersion: 6.0
 
 pool:
   vmImage: 'ubuntu-latest'
