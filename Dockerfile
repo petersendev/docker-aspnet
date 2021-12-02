@@ -26,20 +26,20 @@ RUN \
     && echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories \
     \
     && apk add --no-cache --virtual .build-dependencies \
-        tar=1.34-r0 \
+        tar \
     \
     && apk add --no-cache \
-        libcrypto1.1=1.1.1l-r0 \
-        libssl1.1=1.1.1l-r0 \
-        musl-utils=1.2.2-r1 \
-        musl=1.2.2-r1 \
+        libcrypto1.1 \
+        libssl1.1 \
+        musl-utils \
+        musl \
     \
     && apk add --no-cache \
-        shadow=4.8.1-r0 \
-        bash=5.1.0-r0 \
-        curl=7.79.1-r0 \
-        jq=1.6-r1 \
-        tzdata=2021a-r0 \
+        shadow \
+        bash \
+        curl \
+        jq \
+        tzdata \
     \
     && S6_ARCH="${TARGETPLATFORM}" \
     && if [ "${TARGETPLATFORM}" = "linux/arm/v7" ]; then S6_ARCH="armhf"; fi \
